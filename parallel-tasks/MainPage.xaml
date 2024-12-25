@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="parallel_tasks.MainPage">
+
+    <StackLayout >
+        <Image
+            Source="dotnet_bot.png"
+            HeightRequest="100"
+            Aspect="AspectFit"
+            SemanticProperties.Description="dot net bot in a race car number eight" />
+        <Label
+            Text="Welcome to Weather App"
+            Style="{StaticResource SubHeadline}"
+            SemanticProperties.HeadingLevel="Level2"
+            SemanticProperties.Description="Welcome to Weather App" />
+        <Label
+            Text="{Binding LocalTime}"
+            Style="{StaticResource SubHeadline}"
+            FontSize="Small"/>
+        <RefreshView 
+            Grid.Row="2"
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding RefreshCommand}">
+            <CollectionView 
+                Grid.Row="2"
+                ItemsSource="{Binding Weather}"                 
+                Margin="10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame 
+                            Padding="10" 
+                            Margin="5" 
+                            CornerRadius="8" 
+                            BorderColor="Gray" 
+                            HasShadow="True">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding City}" 
+                                    FontAttributes="Bold" 
+                                    FontSize="18" 
+                                    TextColor="DarkBlue" />
+                                <Label Text="{Binding LocalTime}" 
+                                    FontSize="14" 
+                                    TextColor="Gray" />
+                                <Label Text="{Binding TemperatureF}" 
+                                    FontSize="16" 
+                                    TextColor="Black" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+</ContentPage>
